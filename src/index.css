@@ -6,6 +6,11 @@
   margin: 0;
   padding: 0;
 }
+
+button {
+  border: none;
+  background-color: transparent;
+}
  .test {
   border: 2px solid black;
 }
@@ -36,13 +41,76 @@
   align-items: center;
   justify-content: center;
 }
-.card-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.card {
   border-radius: 10px;
-  background-color: var(--light);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
   margin: 10px;
   padding: 20px;
+}
+
+.size {
+  width: 30px;
+  height: 30px;
+}
+
+.shadow-white {
+  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.4);
+}
+
+.background-white {
+  background-color: white;
+}
+
+.component {
+  display: grid;
+  grid-template-columns: 5% 90% 5%;
+}
+
+.icon {
+  display: flex;
+  margin-top: 20px;
+  align-items: flex-start;
+  justify-items: center;
+}
+
+.main {
+  display: grid;
+  row-gap: 10px;
+}
+
+.title {
+  display: grid;
+}
+
+.input {
+  display: flex;
+  gap: 10px;
+}
+
+.children {
+  display: grid;
+  grid-template-columns: 5% 95%;
+}
+
+.large {
+  font-size: 30px;
+}
+
+.medium {
+  font-size: 25px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.indent {
+  margin-left: 5%;
+}
+input[type="text"] {
+  height: auto;
+  font-size: 30px;
+  width: 100px;
+  border: none;
+  border-bottom: 2px solid black;
 }
