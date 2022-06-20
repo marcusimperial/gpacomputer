@@ -11,36 +11,7 @@ button {
   border: none;
   background-color: transparent;
 }
- .test {
-  border: 2px solid black;
-}
 
-.center {
-  text-align: center;
-}
-
-.display {
-  display: grid;
-  text-align: center;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
-  height: 80vh;
-  padding: 20px;
-
-}
-
-.display2 {
-  display: grid;
-  gap: 10px;
-  height: 40px;
-  padding: 20px;
-}
-
-.finalgpa {
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-}
 .card {
   border-radius: 10px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
@@ -49,8 +20,8 @@ button {
 }
 
 .size {
-  width: 30px;
-  height: 30px;
+  width: 4vw;
+  height: 4vh;
 }
 
 .shadow-white {
@@ -63,7 +34,7 @@ button {
 
 .component {
   display: grid;
-  grid-template-columns: 5% 90% 5%;
+  grid-template-columns: 1fr 9fr 1fr;
 }
 
 .icon {
@@ -89,9 +60,13 @@ button {
 
 .children {
   display: grid;
-  grid-template-columns: 5% 95%;
+  grid-template-columns: 1fr 9fr;
 }
 
+.header {
+  font-size: 40px;
+
+}
 .large {
   font-size: 30px;
 }
@@ -110,7 +85,14 @@ button {
 input[type="text"] {
   height: auto;
   font-size: 30px;
-  width: 100px;
+  width: 40px;
   border: none;
   border-bottom: 2px solid black;
+}
+
+.title input[type="text"] {
+  width: 50vw;
+}
+.title .input input[type="text"] {
+  width: 50px;
 }

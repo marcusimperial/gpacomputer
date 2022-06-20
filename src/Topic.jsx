@@ -25,11 +25,11 @@ const Topic = ({ data }) => {
                     <div className="title">
                         {
                             updateName ? <input type="text" id={data.id} value={data.name} onChange={handleTopicNameChange} onBlur={handleNameSave} onKeyUp={handleNameSave} onFocus={handleFocus} autoFocus />
-                            : <h1 className="large" id={data.id} onDoubleClick={() => setUpdateName(true)}>{data.name} (Grade: {data.grade})</h1>
+                            : <h1 className="large" id={data.id} onDoubleClick={() => setUpdateName(true)}>{data.name}</h1>
                         }
                         {
                             updatePercent ? <input type="text" id={data.id} value={data.percent} onChange={handleTopicPercentChange} onBlur={handlePercentSave} onKeyUp={handlePercentSave} onFocus={handleFocus} autoFocus />
-                            : <h1 className="medium italic" id={data.id} onDoubleClick={() => setupdatePercent(true)}>Percent: {data.percent*100}%</h1>
+                            : <h1 className="medium italic" id={data.id} onDoubleClick={() => setupdatePercent(true)}>Percent: {data.percent}%</h1>
                         }
                     </div>
                     <div className="input">

@@ -19,13 +19,16 @@ const Term = ({ data }) => {
         <div className="card background-white">
             <div className="component">
                 <div className="icon">
-                <button id={data.id} onClick={handleTermDelete}><AiFillMinusCircle className="size" /></button>
+                    <button id={data.id} onClick={handleTermDelete}><AiFillMinusCircle className="size" /></button>
                 </div>
                 <div className="main">
+                    <div className="title">
                     {
                         update ? <input type="text" id={data.id} value={data.title} onChange={handleTermUpdate} onBlur={handleSave} onKeyUp={handleSave} onFocus={handleFocus} autoFocus />
-                        : <h1 className="large" id={data.id} onDoubleClick={() => setUpdate(true)}>{data.title} (GPA: {data.gpa})</h1>
+                        : <h1 className="large" id={data.id} onDoubleClick={() => setUpdate(true)}>{data.title}</h1>
                     }
+                    </div>
+
                     <div className="input">
                         <h1 className="medium">Term GPA</h1>
                         <input type="text" id={data.id} value={data.gpa} onChange={handleTermChange} onFocus={handleFocus} />

@@ -33,7 +33,7 @@ const Subject = ({ data }) => {
                     <div className="title">
                         {
                             updateName ? <input type="text" id={data.id} value={data.name} onChange={handleSubjectNameChange} onBlur={handleNameSave} onKeyUp={handleNameSave} onFocus={handleFocus} autoFocus />
-                            : <h1 className="large" id={data.id} onDoubleClick={() => setUpdateName(true)}>{data.name} (Grade: {data.grade})</h1>
+                            : <h1 className="large" id={data.id} onDoubleClick={() => setUpdateName(true)}>{data.name}</h1>
                         }
                         {
                             updateUnits ? <input type="text" id={data.id} value={data.units} onChange={handleSubjectUnitsChange} onBlur={handleUnitsSave} onKeyUp={handleUnitsSave} onFocus={handleFocus} autoFocus />

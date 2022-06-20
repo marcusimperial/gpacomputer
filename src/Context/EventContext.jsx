@@ -27,7 +27,15 @@ const EventContext = ({ children }) => {
         array[array.findIndex(topic => topic.id === e.currentTarget.id)].grade = e.currentTarget.value;
         setTopics(array);
     };
+
+    const confirmation = () => {
+        const check = window.confirm("You're about to delete an item. Do you want to continue?");
+        if (check) return true;
+        return false;
+    }
     const handleTermDelete = (e) => {
+        const check = confirmation();
+        if (!check) return;
         let array = [...terms];
         array = array.filter(term => term.id !== e.currentTarget.id);
         setTerms(array);
@@ -45,6 +53,8 @@ const EventContext = ({ children }) => {
     }
 
     const handleSubjectDelete = (e) => {
+        const check = confirmation();
+        if (!check) return;
         let array = [...subjects];
         array = array.filter(subject => subject.id !== e.currentTarget.id);
         setSubjects(array);
@@ -61,8 +71,11 @@ const EventContext = ({ children }) => {
     }
 
     const handleTopicDelete = (e) => {
+        const check = confirmation();
+        if (!check) return;
         let array = [...topics];
         array = array.filter(topic => topic.id !== e.currentTarget.id);
+        setTopics(array);
 
         let array2 = [...selectedSubjectTopics];
         array2 = array2.filter(selectedTopic => selectedTopic.id !== e.currentTarget.id);

@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect } from "react";
+import { useSkipEffect } from "../CustomHooks";
 import { useStateFunctions, useStateValues } from "./StateContext";
 
 const ComputeFunctions = createContext();
@@ -37,37 +38,29 @@ const ComputeContext = ({ children }) => {
     }
 
     const getDataFromStorage = () => {
-        console.log('DATA FROM STORAGE');
-        const terms = localStorage.getItem('terms');
-        const subjects = localStorage.getItem('subjects');
-        const topics = localStorage.getItem('topics');
+        const retrievedTerms = localStorage.getItem('terms');
+        const retrievedSubjects = localStorage.getItem('subjects');
+        const retrievedTopics = localStorage.getItem('topics');
 
-        const parsedTerms = JSON.parse(terms);
-        const parsedSubjects = JSON.parse(subjects);
-        const parsedTopics = JSON.parse(topics);
-        console.log(typeof parsedTerms);
+        const parsedTerms = JSON.parse(retrievedTerms);
+        const parsedSubjects = JSON.parse(retrievedSubjects);
+        const parsedTopics = JSON.parse(retrievedTopics);
 
-
-        if (terms) setTerms([...parsedTerms]);
-        if (subjects) setSubjects(parsedSubjects);
-        if (topics) setTopics(parsedTopics);
-
-        console.log('terms', terms);
-        console.log('subjects', subjects);
-        console.log('topics', topics);
+        if (parsedTerms) setTerms(parsedTerms);
+        if (parsedSubjects) setSubjects(parsedSubjects);
+        if (parsedTopics) setTopics(parsedTopics);
 
         filterSubjects();
     }
     useEffect(getDataFromStorage, []);
 
     const saveDataToStorage = () => {
-        console.log('SAVING DATA TO STORAGE --')
         localStorage.setItem('terms', JSON.stringify(terms));
         localStorage.setItem('subjects', JSON.stringify(subjects));
         localStorage.setItem('topics', JSON.stringify(topics));
     }
 
-    useEffect(saveDataToStorage, [terms, subjects, topics]);
+    useSkipEffect(saveDataToStorage, [terms, subjects, topics]);
 
     const calculateTermGpa = () => {
         let totalUnits = 0;
@@ -78,30 +71,30 @@ const ComputeContext = ({ children }) => {
         }
         let array = [...terms];
         const index = array.findIndex(term => term.id === selectedTerm.id);
-        if (index > -1) array[index].gpa = round(total/totalUnits);
+        if (index > -1) array[index].gpa = round(total/totalUnits) || 0;
         setTerms(array);
     }
 
-    useEffect(calculateTermGpa, [subjects]);
+    useSkipEffect(calculateTermGpa, [subjects]);
 
     const calculateFinalGpa = () => {
         let sum = 0;
         for (const { gpa } of terms) sum = parseFloat(gpa) + sum;
-        setFinalGPA(round(sum / terms.length));
+        setFinalGPA(round(sum / terms.length) || 0);
     }
 
-    useEffect(calculateFinalGpa, [terms]);
+    useSkipEffect(calculateFinalGpa, [terms]);
 
     const calculateSubjectGrade = () => {
         let numeric = 0;
-        for (const { grade, percent } of selectedSubjectTopics) numeric = numeric + ((indexes[`${grade}`] || 0.0) * percent);
+        for (const { grade, percent } of selectedSubjectTopics) numeric = numeric + ((indexes[`${grade}`] || 0.0) * ( percent / 100));
         let array = [...subjects];
         const index = array.findIndex(subject => subject.id === selectedSubject.id);
         if (index > -1) array[index].grade = convertNumericToletter(numeric);
         setSubjects(array);
     }
    
-    useEffect(calculateSubjectGrade, [topics]);
+    useSkipEffect(calculateSubjectGrade, [topics]);
 
     const filterSubjects = () => {
         setSelectedTermSubjects(subjects.filter(subject => subject.term === selectedTerm.id));
@@ -109,11 +102,11 @@ const ComputeContext = ({ children }) => {
         if (selectedSubject.term !== selectedTerm.id) setSelectedSubject({});
     }
 
-    useEffect(filterSubjects, [selectedTerm, subjects]);
+    useSkipEffect(filterSubjects, [selectedTerm, subjects]);
 
     const filterTopics = () => setSelectedSubjectTopics(topics.filter(topic => topic.subject === selectedSubject.id));
 
-    useEffect(filterTopics, [selectedSubject, topics]);
+    useSkipEffect(filterTopics, [selectedSubject, topics]);
 
     const ComputeFunctionsEncapsulator = {
 
